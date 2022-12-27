@@ -10,8 +10,7 @@ test: ## テストを実行する
 	@echo Test start...
 	~/.cask/bin/cask exec emacs \
 	-Q -batch \
-	-l ./test/byte-run.el \
-	-l ./test/fns.el \
+	-l ./setup.el \
 	-f ert-run-tests-batch-and-exit
 
 compile: ## バイトコンパイルする
