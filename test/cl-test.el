@@ -1,4 +1,4 @@
-(require 'cl)
+(require 'cl-lib)
 
 (ert-deftest defstruct-test ()
   ;; 構造体定義

@@ -3,6 +3,6 @@
 (source melpa)
 
 (development
-        (depends-on "cl")
+        (depends-on "cl-lib")
         (depends-on "ert")
         (depends-on "f"))
