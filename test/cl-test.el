@@ -2,7 +2,7 @@
 
 (ert-deftest defstruct-test ()
   ;; 構造体定義
-  (defstruct box width height)
+  (cl-defstruct box width height)
 
   ;; 初期化
   (setq  b1 (make-box :width 600 :height 300))
