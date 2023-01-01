@@ -24,6 +24,8 @@ jobs:
     - uses: purcell/setup-emacs@master
       with:
         version: ${{ matrix.emacs_version }}
+    - name: cask install
+      run: make init-cask
     - name: package-install
       run: make install
     - name: lisp-test

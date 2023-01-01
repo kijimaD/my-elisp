@@ -1,9 +1,11 @@
 .PHONY: help install test compile
 .DEFAULT_GOAL := help
 
-install: ## 依存関係インストール
+init-cask: ## caskをインストール
 	git clone https://github.com/cask/cask ~/.cask
 	PATH="$HOME/.cask/bin:$PATH"
+
+install: ## 依存パッケージをインストール
 	~/.cask/bin/cask install
 
 test: ## テストを実行する
