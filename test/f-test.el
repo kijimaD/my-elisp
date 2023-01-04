@@ -8,11 +8,7 @@
     (should (eq t (file-name-absolute-p path)))))
 
 (ert-deftest f-read-test ()
-  "ファイルの中身を読み込む"
-  (should-not (zerop (length (f-read-text "f-test.el")))))
-
-(ert-deftest f-write-test ()
-  "ファイルに書き込む"
+  "ファイルの中身を書き込む+読み込む"
   (with-temp-file "tmp"
     (f-write-text "content" 'utf-8 "./tmp")
-    (should-not (zerop (length (f-read-text "./tmp"))))))
+    (should-not (zerop (length (f-read-text "tmp"))))))
