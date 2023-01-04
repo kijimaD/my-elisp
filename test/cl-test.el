@@ -11,3 +11,12 @@
   ;; スロットにアクセスできる
   (should (eq 600 (box-width b1)))
   (should (eq 300 (box-height b1)))))
+
+(ert-deftest cl-letf-test ()
+  "cl-letfはローカルスコープの関数を定義する。
+モックに使える。princをinsertに置き換えて、バッファをチェックしてテストできるようにする。"
+  (cl-letf (((symbol-function 'princ) #'insert))
+    (with-temp-buffer
+      (princ "this is test")
+      (should-not (zerop (length (buffer-string))))
+      )))

@@ -53,3 +53,12 @@
     (dolist (num '(1 2 3 4 5))
       (setq result (+ result num)))
     (should (equal 15 result))))
+
+(ert-deftest s-join-test()
+  "セパレータ指定してjoinする"
+  (let ((result (s-join ", " '("a" "b" "c"))))
+    (should (equal "a, b, c" result))))
+
+(ert-deftest symbol-name-test ()
+  "シンボル名を文字列に変換する"
+  (should (equal "cons" (symbol-name 'cons))))
