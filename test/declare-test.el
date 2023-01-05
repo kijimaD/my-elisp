@@ -5,7 +5,7 @@
     (defmacro defmacro-exec (&rest body)
       (declare (indent defun))
       (progn body))
-    (should (equal "test" (defmacro-exec progn "test")))
+    (should (string= "test" (defmacro-exec progn "test")))
     (should (equal 6 (defmacro-exec + 1 2 3)))))
 
 (ert-deftest defmacro-test2 ()

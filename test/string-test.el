@@ -11,7 +11,7 @@
   (let (sym)
     (setq sym "test")
     ;; 文字列をシンボル化 → 評価して文字列 → シンボル化 → 評価
-    (should (equal "test" (eval (intern "sym"))))))
+    (should (string= "test" (eval (intern "sym"))))))
 
 (ert-deftest symbol-function-test()
   "シンボルの関数定義を調べる"
@@ -57,8 +57,8 @@
 (ert-deftest s-join-test()
   "セパレータ指定してjoinする"
   (let ((result (s-join ", " '("a" "b" "c"))))
-    (should (equal "a, b, c" result))))
+    (should (string= "a, b, c" result))))
 
 (ert-deftest symbol-name-test ()
   "シンボル名を文字列に変換する"
-  (should (equal "cons" (symbol-name 'cons))))
+  (should (string= "cons" (symbol-name 'cons))))
