@@ -17,3 +17,6 @@
     (should (eq 1 count))
     (inc-macro count)
     (should (eq 2 count))))
+
+(ert-deftest fboundp-test ()
+  (should (equal t (fboundp 'cons))))
