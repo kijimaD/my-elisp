@@ -1,25 +1,21 @@
-(defmacro with-test ()
-
-  )
-
 (defmacro my-with-ansi (&rest body)
   `(cl-macrolet
        ,(mapcar
          (lambda (alias)
-           (let ((fn (intern (format "my-ansi-%s" (symbol-name alias)))))
-             `(,alias (string &rest objects)
-                      ,(list 'backquote (list fn ',string ',@objects)))))
-         (append
-          (mapcar 'car my-ansi-colors)))
-     ,(cons 'ansi--concat body)))
+           `(,alias                     ; 関数名
+             (string)                   ; 引数
+             ,(list 'backquote (list 'message '(concat "<b>" ',string "/<b>"))))) ; 本体
+         '(black)
+         )
+     ,(cons 'my-ansi--concat body)))
 
-;; cl-macroletがどういう働きをしてるのかわからん
-;; 最後にconsが出てくるのがわからん
+(defun my-ansi--concat (&rest sequences)
+  (apply #'concat (cl-remove-if-not 'stringp sequences)))
 
-(my-with-ansi "aa" (black "black") "aa")
+(my-with-ansi "this is " (black "black") " text")
 
-(defconst my-ansi-colors
-  '((black))
-  "List of text colors.")
-
-(defun my-ansi-black (sym) "[BLACK]")
+;; (ert-deftest my-with-ansi-test ()
+;;   (let ((result (my-with-ansi "this is " (black "black") " text")))
+;;     (should (string= "this is <b>black</b> text" result))
+;;     )
+;;   )
