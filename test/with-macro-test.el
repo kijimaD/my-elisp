@@ -5,7 +5,7 @@
            `(,alias                     ; 関数名
              (string)                   ; 引数
              ,(list 'backquote (list 'concat "<" (symbol-name alias) ">" ',string "</" (symbol-name alias) ">")))) ; 本体
-         '(black)
+         '(black white)                       ; 関数リスト
          )
      ,(cons 'my-ansi--concat body)))
 
@@ -13,6 +13,7 @@
   (apply #'concat (cl-remove-if-not 'stringp sequences)))
 
 (ert-deftest my-with-ansi-test ()
-  (let ((result (my-with-ansi "this is " (black "text"))))
-    (should (string= "this is <black>text</black>" result))
-    ))
+  (let ((result-b (my-with-ansi "this is " (black "text")))
+        (result-w (my-with-ansi "this is " (white "text"))))
+    (should (string= "this is <black>text</black>" result-b))
+    (should (string= "this is <white>text</white>" result-w))))
