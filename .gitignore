@@ -1,4 +1,2 @@
 *.elc
 .cask
-tmp
-tmp.el
