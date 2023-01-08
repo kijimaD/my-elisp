@@ -15,6 +15,7 @@
 
 (ert-deftest f-file?-test ()
   (with-temp-file "tmp"
+    (f-write-text "content" 'utf-8 "./tmp")
     (should (eq t (f-file? "tmp")))
     (should (eq nil (f-file? "not exist")))))
 
