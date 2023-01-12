@@ -19,7 +19,7 @@ compile: ## バイトコンパイルする
 	@echo Byte compile start...
 	~/.cask/bin/cask exec emacs \
 	-Q -batch \
-	-L ./test \
+	-l ./setup.el \
 	--eval "(setq byte-compile-error-on-warn t)" \
 	-f batch-byte-compile ./test/*.el
 
