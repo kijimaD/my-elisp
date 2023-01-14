@@ -20,10 +20,19 @@
   (should (equal (lambda (n) (+ n 1)) (symbol-function 'my))))
 
 (ert-deftest apply-test()
-  "関数を適用する"
+  "関数を適用する。funcallとの違いは、最後の引数をオブジェクトのリストとして渡すこと"
   (should (eq 10 (apply '+ 1 2 '(3 4))))
   (should (eq 15 (apply '+ '(1 2 3 4 5))))
-  (should (eq 15 (apply '+ 1  2 '(3 4 5)))))
+  (should (eq 15 (apply '+ 1 2 '(3 4 5))))
+  (should (equal '(1 2 3 4) (apply 'append '((1 2) (3 4)))))
+  (should (equal '(1 2 3 4) (append '(1 2) '(3 4)))))
+
+(ert-deftest funcall-test ()
+  "関数を適用する。引数は普通に関数に渡す引数と同じ渡し方で渡す(applyと違って1つのリストに入れない)"
+  (should (eq 6 (funcall '+ 1 2 3)))
+  (should (equal '(1 . 2) (funcall 'cons 1 2)))
+  (should (equal '(1) (funcall 'cons 1 nil)))
+  (should (equal '(1 2 3 4) (funcall 'append '(1 2) '(3 4)))))
 
 (ert-deftest dolist-test0()
   "
@@ -37,8 +46,7 @@
   (let (result)
     (dolist (element '(1 2 3))
       (setq result (cons element result)))
-    (should (equal '(3 2 1) result))
-    ))
+    (should (equal '(3 2 1) result))))
 
 (ert-deftest dolist-test1()
   (let (result)
