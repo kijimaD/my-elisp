@@ -11,3 +11,15 @@
   (let* ((result (when-let ((name nil))
                    (format "%s" name))))
     (should (eq nil result))))
+
+(ert-deftest unwind-protect-test ()
+  "データ構造を一時的に不整合にする可能性にあるときに使う。失敗したときはcleanup formを実行する
+(unwind-protect BODYFORM UNWINDFORMS...)"
+  (let* ((temp "*temp*")
+         (buffer (get-buffer-create temp)))
+    (with-current-buffer buffer
+      (unwind-protect
+          (progn
+            (should (get-buffer temp))
+            (kill-buffer buffer))
+        (should-not (get-buffer temp))))))

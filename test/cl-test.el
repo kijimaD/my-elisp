@@ -34,3 +34,19 @@
     (cl-assert (eq i 1))
     ;; (cl-assert (eq i 2))  ;; => エラー
     ))
+
+(ert-deftest cl-block-test ()
+  "cl-blockとcl-returnを組み合わせてreturnを使う"
+  (let* ((check 0)
+         (result (cl-block my-func
+                   (progn
+                     (cl-return-from my-func) ;return
+                     (setq check 10)    ;スルー
+                     ))))
+    (should (eq 0 check)))
+
+  (let* ((check 0)
+         (result (cl-block my-func
+                   nil
+                   (setq check "BODY"))))
+    (should (string= "BODY" check))))
