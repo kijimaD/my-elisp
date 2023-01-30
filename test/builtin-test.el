@@ -23,3 +23,7 @@
             (should (get-buffer temp))
             (kill-buffer buffer))
         (should-not (get-buffer temp))))))
+
+(ert-deftest apropos-internal-test ()
+  "マッチするすべてのシンボルを返す"
+  (should (eq 1 (length (apropos-internal "^apropos-internal$")))))

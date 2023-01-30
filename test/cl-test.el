@@ -50,3 +50,9 @@
                    nil
                    (setq check "BODY"))))
     (should (string= "BODY" check))))
+
+(ert-deftest cl-remove-if-not-test ()
+  "実行結果がnilだった要素をリストから削除する"
+  (let* ((list '(1 2 "3" "4" 5 6))
+         (result (cl-remove-if-not 'stringp list)))
+    (should (equal '("3" "4") result))))
