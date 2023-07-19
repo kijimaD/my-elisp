@@ -13,7 +13,7 @@
     (should (eq nil result))))
 
 (ert-deftest unwind-protect-test ()
-  "データ構造を一時的に不整合にする可能性にあるときに使う。失敗したときはcleanup formを実行する
+  "データ構造を一時的に不整合にする可能性にあるときに使う。成功・失敗どちらでもcleanup formを実行する
 (unwind-protect BODYFORM UNWINDFORMS...)"
   (let* ((temp "*temp*")
          (buffer (get-buffer-create temp)))

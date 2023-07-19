@@ -21,7 +21,8 @@ compile: ## バイトコンパイルする
 	-Q -batch \
 	-l ./setup.el \
 	--eval "(setq byte-compile-error-on-warn t)" \
-	-f batch-byte-compile ./test/*.el
+	-f batch-byte-compile ./test/*.el && \
+	rm test/*.elc
 
 help: ## ヘルプを表示する
 	@echo Emacs is best editor!

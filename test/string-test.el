@@ -20,15 +20,15 @@
   (should (equal (lambda (n) (+ n 1)) (symbol-function 'my))))
 
 (ert-deftest apply-test()
-  "関数を適用する。funcallとの違いは、最後の引数をオブジェクトのリストとして渡すこと"
-  (should (eq 10 (apply '+ 1 2 '(3 4))))
+  "関数を適用する。funcallとの違いは、最後の引数をオブジェクトのリストとして渡すこと。引数がいくつか決まっていないときに使う"
+  (should (eq 7 (apply '+ '(3 4))))
   (should (eq 15 (apply '+ '(1 2 3 4 5))))
   (should (eq 15 (apply '+ 1 2 '(3 4 5))))
   (should (equal '(1 2 3 4) (apply 'append '((1 2) (3 4)))))
   (should (equal '(1 2 3 4) (append '(1 2) '(3 4)))))
 
 (ert-deftest funcall-test ()
-  "関数を適用する。引数は普通に関数に渡す引数と同じ渡し方で渡す(applyと違って1つのリストに入れない)"
+  "関数を適用する。引数は普通に関数に渡す引数と同じ渡し方で渡す(applyと違って1つのリストに入れない)。引数がいくつか決まっているときに使う"
   (should (eq 6 (funcall '+ 1 2 3)))
   (should (equal '(1 . 2) (funcall 'cons 1 2)))
   (should (equal '(1) (funcall 'cons 1 nil)))
@@ -70,3 +70,15 @@
 (ert-deftest symbol-name-test ()
   "シンボル名を文字列に変換する"
   (should (string= "cons" (symbol-name 'cons))))
+
+(ert-deftest dotimes-test ()
+  "dotimes"
+  (let (value)
+    (dotimes (number 3)
+      (setq value (cons number value)))
+    (should (equal value '(2 1 0))))
+
+  (let ((value 0))
+    (dotimes (number 3)
+      (setq value (+ number value)))
+    (should (eq value 3))))
